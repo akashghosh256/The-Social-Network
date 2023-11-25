@@ -8,6 +8,15 @@ import helmet from "helmet";
 import morgan from "morgan"
 import path from "path";
 import { fileURLToPath } from "url";
+import authRoutes from "./routes/auth.js";   // for working on login information
+import {register} from "./controllers/auth.js";
+import userRoutes from "./routes/users.js"
+import postRoutes from "./routes/posts.js"
+import { verifyToken } from "./middleware/auth.js";
+import  { createPost }  from  "./controllers/posts.js";
+import User from "./models/User.js";
+import Post from "./models/Post.js";
+import { users, posts } from "./data/index.js";
 
 /* CONFIGURATIONS */
 
@@ -29,9 +38,6 @@ app.use(express.json());
 app.use(helmet());
 
 app.use(helmet.crossOriginResourcePolicy({ policy : "cross-origin"}));
-
-
-
 
 // Use Morgan middleware for logging HTTP requests in 'common' format
 app.use(morgan("common"));
@@ -66,24 +72,46 @@ const storage = multer.diskStorage({
 // Multer setup - using previously defined disk storage
 const upload = multer({ storage });
 
+/* ROUTES FOR FILE FILE UPLOAD - we are using this route here because we need upload 
+section just above register  */
+app.post("/auth/register", upload.single("picture"), register);  // this grabs the picture
+/* when users create a post we allow the user upload a picture  */
+app.post("/posts", verifyToken, upload.single("picture"),  createPost) ; // this will upload the picture
+
+/* ROUTES */
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
+
+
+
+
+
+
 /* MOONGOOSE SETUP */
 
 // Connect to MongoDB using Mongoose
 mongoose.connect(process.env.MONGO_URL, {
-   // useNewUrlParser: true,
-    //useUnifiedTopology: true,
+//    useNewUrlParser: true,
+//     useUnifiedTopology: true,
 })
     .then(() => {
         // If the connection is successful, set up the Express app to listen on a specified port
-        const PORT = process.env.PORT || 6001;
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-        });
-    })
+       const PORT = process.env.PORT || 6001;
+        app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+// ADD dummy data one time -- commnet out after one time
+            // User.insertMany(users);
+            // Post.insertMany(posts);
+        })
+
     .catch((error) => {
         // If there's an error connecting to MongoDB, log the error
         console.log(`${error} did not connect`);
     });
+
+
+
+
 
 
 
