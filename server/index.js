@@ -99,7 +99,7 @@ mongoose.connect(process.env.MONGO_URL, {
         // If the connection is successful, set up the Express app to listen on a specified port
        const PORT = process.env.PORT || 6001;
         app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
-// ADD dummy data one time -- commnet out after one time
+// ADD dummy data from folder data/index.js one time -- commnet out after one time
             // User.insertMany(users);
             // Post.insertMany(posts);
         })
