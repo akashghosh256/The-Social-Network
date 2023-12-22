@@ -1,3 +1,6 @@
+
+// the small widget box at left corner that shows name,location,job of yours
+
 import {
   ManageAccountsOutlined,
   EditOutlined,
@@ -30,9 +33,24 @@ const UserWidget = ({ userId, picturePath }) => {
     setUser(data);
   };
 
+// 3:43:49
+// so now if you remember why we are doing this is if you go back
+// 3:43:54
+// to our server we go to middleware we go to auth you can see in
+// 3:44:01
+// our authorization we are writing Bearer in our authorization header
+// 3:44:07
+// and we are taking everything behind it which is the token that is how we grab the token and then
+// 3:44:14
+// we verify the jot token so this is what's happening over here
+
+
+
+// calling api for getUser
   useEffect(() => {
     getUser();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); 
+  // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!user) {
     return null;

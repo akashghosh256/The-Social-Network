@@ -61,6 +61,11 @@ const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 // already automatically determines the color based on the particular mode
  
   const theme = useTheme();
+
+// 2:26:40
+// to write a lot of this stuff but it makes it very nice and clean if you configure these variables
+// 2:26:48
+// before you write it inside the jsx so I'm going to have a dark one
   const neutralLight = theme.palette.neutral.light;
   const dark = theme.palette.neutral.dark;
   const background = theme.palette.background.default;
@@ -84,8 +89,11 @@ const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
             },
           }}
         >
+
           {/* Sociopedia */}
           TheSocialNetwork
+
+
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
@@ -143,7 +151,9 @@ const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
       ) : (
         <IconButton
           onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
-        >
+//     2:41:05
+// toggle so we're just going to flip it so this is going to pop up an icon of a
+          >
           <Menu />
         </IconButton>
       )}

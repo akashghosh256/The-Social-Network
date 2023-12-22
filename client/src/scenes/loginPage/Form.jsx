@@ -16,6 +16,12 @@ import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
 
+
+// 2:55:10
+// schema so these are the yup validation schema so this will determine the shape
+// 2:55:15
+// of how the form library is going to be saving this information so I'm going to
+
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),

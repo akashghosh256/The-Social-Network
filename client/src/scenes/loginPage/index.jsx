@@ -2,7 +2,9 @@ import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
 
 const LoginPage = () => {
+  // Access the current theme using MUI's useTheme hook
   const theme = useTheme();
+   // Use MUI's useMediaQuery hook to determine if the screen is non-mobile
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   return (
     <Box>
@@ -13,7 +15,8 @@ const LoginPage = () => {
         textAlign="center"
       >
         <Typography fontWeight="bold" fontSize="32px" color="primary">
-          Sociopedia
+          {/* Sociopedia */}
+          TheSocialNetwork
         </Typography>
       </Box>
 
